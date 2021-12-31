@@ -1,0 +1,27 @@
+# Maintainer:  Mike Swanson <mikeonthecomputer@gmail.com>
+# Contributor: Daniel M. Capella <polyzen@archlinux.info>
+# Contributor: carstene1ns <arch carsten-teibes de>
+# Contributor: <kfgz at interia dot pl>
+# Contributor: <damir at archlinux dot org>
+
+pkgname=ms-sys
+pkgver=2.7.0
+pkgrel=1
+epoch=1
+pkgdesc='Used to create Microsoft compatible boot records'
+arch=('i686' 'x86_64')
+url=http://ms-sys.sourceforge.net/
+license=('GPL')
+conflicts=('ms-sys-devel')
+source=("http://prdownloads.sourceforge.net/ms-sys/ms-sys-$pkgver.tar.gz")
+sha512sums=('d9828c86a5b316cadcc712ea029bcf7322f89ab31424982fe2a7e23cdb2334a5d076c2b58299f1f312b0d4b4c869a3d7ffadf236230344bc2e7b4a72c668510e')
+
+build() {
+  cd ms-sys-$pkgver
+  make
+}
+
+package() {
+  cd ms-sys-$pkgver
+  make PREFIX=/usr MANDIR=/usr/share/man DESTDIR="$pkgdir" install
+}
