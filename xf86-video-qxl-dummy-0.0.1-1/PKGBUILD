@@ -1,7 +1,7 @@
 pkgname=xf86-video-qxl-dummy
 pkgver=0.0.1
 pkgrel=1
-pkgdesc="Replacement for xf86-video-qxl which is currently broken"
+pkgdesc="Replacement for xf86-video-qxl which is currently broken (see SystemRescue issue #235)"
 arch=(any)
 provides=('xf86-video-qxl')
 conflicts=('xf86-video-qxl' 'xf86-video-qxl-git')
@@ -11,4 +11,6 @@ package() {
     mkdir -p "${pkgdir}"/share/doc/"${pkgname}"/
     rm -f "${pkgdir}"/share/doc/"${pkgname}"/README
     echo "This is a dummy package" >> "${pkgdir}"/share/doc/"${pkgname}"/README
+    echo >> "${pkgdir}"/share/doc/"${pkgname}"/README
+    echo "Necessary to replace a broken package, see SystemRescue issue #235" >> "${pkgdir}"/share/doc/"${pkgname}"/README
 }
