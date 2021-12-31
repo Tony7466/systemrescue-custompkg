@@ -1,0 +1,11 @@
+This package is a minimal build of "mesa" in order to replace the original
+"mesa" package. The original "mesa" package is huge, and pulls "llvm-libs" as
+a dependency which is also very large. SystemRescue should not need OpenGL
+hence most of the features in mesa are not needed. There are some libraries
+which are still required for XOrg to work proplery on some systems though.
+This is why a minimal version of the "mesa" package has been created. This
+package must be added to the list of packages, so it gets installed as a
+replacement for the original "mesa" package.
+
+You can find more details in the following ticket:
+https://gitlab.com/systemrescue/systemrescue-sources/-/issues/241
