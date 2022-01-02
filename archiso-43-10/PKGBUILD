@@ -11,12 +11,12 @@ url='https://projects.archlinux.org/archiso.git/'
 depends=('make' 'arch-install-scripts' 'squashfs-tools' 'libisoburn' 'dosfstools' 'lynx' 'grub')
 source=("https://sources.archlinux.org/other/${pkgname}/${pkgname}-${pkgver}.tar.gz"
         "https://sources.archlinux.org/other/${pkgname}/${pkgname}-${pkgver}.tar.gz.sig"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/master/patches/archiso-v43-01-squashfs-options.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/master/patches/archiso-v43-02-fix-pxeboot-dhcp.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/master/patches/archiso-v43-03-fix-pxeboot-multiple-interfaces.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/master/patches/archiso-v43-04-increase-cow-spacesize.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/master/patches/archiso-v43-05-add-loadsrm.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/master/patches/archiso-v43-06-copytoram.patch")
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7de332d5c34878bc0de2646c1ab8e183a4667595/patches/archiso-v43-01-squashfs-options.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7de332d5c34878bc0de2646c1ab8e183a4667595/patches/archiso-v43-02-fix-pxeboot-dhcp.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7de332d5c34878bc0de2646c1ab8e183a4667595/patches/archiso-v43-03-fix-pxeboot-multiple-interfaces.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7de332d5c34878bc0de2646c1ab8e183a4667595/patches/archiso-v43-04-increase-cow-spacesize.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7de332d5c34878bc0de2646c1ab8e183a4667595/patches/archiso-v43-05-add-loadsrm.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7de332d5c34878bc0de2646c1ab8e183a4667595/patches/archiso-v43-06-copytoram.patch")
 sha256sums=('4d2274cc5f1c48883941c3e37dfe7882632f9c455f97635aa079c1812571cb13'
             'SKIP'
             'b0a6f5dbb16f04da7cf9b98087e4a81ced97d874a1d7f18334e6fca32d07120c'
