@@ -5,8 +5,8 @@
 
 pkgname=('mesa-minimal')
 pkgdesc="Minimal version of the mesa package to only provide essential libraries"
-pkgver=21.3.3
-pkgrel=2
+pkgver=21.3.4
+pkgrel=1
 arch=('i686' 'x86_64')
 makedepends=('python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
@@ -17,7 +17,7 @@ license=('custom')
 source=(https://mesa.freedesktop.org/archive/mesa-${pkgver}.tar.xz{,.sig}
         README
         LICENSE)
-sha512sums=('0263d75435f8c16d40eba3eae29bf372e8994816718deec153c582a17c4dd6ef1c67b3236ed31e63f98bf4e1089fac5cfafae9fb84d3e1fa919b274f43e7e673'
+sha512sums=('7aeea3dba0d39f4ac9f23c54aa0e6853d48000f50c4dd484618c28debe705cdd765ae8fafb5ddea0773976f7189849d9128be3f2282fea74394b59019cb786b9'
             'SKIP'
             '09a153cafd9833e156b56ec687d64d738046c948b122dfa5fb7d05e30cf3b42733ea7ea80ef9de87b4027e39b3c07802c97ebc8bdba5d843f884e6e6013037d4'
             'f9f0d0ccf166fe6cb684478b6f1e1ab1f2850431c06aa041738563eb1808a004e52cdec823c103c9e180f03ffc083e95974d291353f0220fe52ae6d4897fecc7')
