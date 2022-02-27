@@ -24,8 +24,8 @@ to be inline with the version of the long-term supported kernel.
   in a docker container. So the first step is to prepare an Arch Linux build
   environment in one form or another.
 * Go to the directory which contains the PKGBUILD file for a particular package,
-  and then run the following command: `makepkg`. This command will download the
-  program source code, and it will build the package.
+  and then run the following command: `makepkg -cf`. This command will download
+  the program source code, and it will build the package.
 
 ## Building custom packages with docker
 You can run the build process in docker containers, either because you are not
