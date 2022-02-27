@@ -1,0 +1,12 @@
+FROM fdupoux/archlinux32
+RUN mkdir -p /workspace
+RUN pacman -Syyu --noconfirm sudo binutils elfutils git archiso fakeroot gcc make cmake patch python ruby && rm -rf /var/cache/pacman/pkg/*
+RUN pacman -Syyu --noconfirm autoconf autogen automake pkgconf clang llvm valgrind meson bison byacc flex && rm -rf /var/cache/pacman/pkg/*
+RUN pacman -Syyu --noconfirm parted reiserfsprogs ntfs-3g fuse dialog asciidoc liburcu libinih xmlto python-setuptools gtk2 gtk3 && rm -rf /var/cache/pacman/pkg/*
+RUN pacman -Syyu --noconfirm nss dbus-glib mbedtls libxt cloud-utils python-mako && rm -rf /var/cache/pacman/pkg/*
+RUN pacman -Syyu --noconfirm libclc libva libvdpau wayland-protocols glslang directx-headers && rm -rf /var/cache/pacman/pkg/*
+RUN ln -s /usr/bin/core_perl/pod2man /usr/bin/
+RUN useradd -m -u 1000 -s /bin/bash user
+USER user
+CMD ["setarch","i686","/usr/bin/bash"]
+WORKDIR /workspace

@@ -1,5 +1,6 @@
-*/pkg
-*/src
-*/*.tar*
-*/*.tgz*
-archiso*/*.patch
+pkgrepo
+packages/*/*.tar*
+packages/*/*.tgz*
+packages/*/*.patch
+packages/*/pkg
+packages/*/src
