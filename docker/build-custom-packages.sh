@@ -35,7 +35,7 @@ if ! findmnt ${pkgcache} >/dev/null; then
 fi
 
 # Run a shell in the container from which to build packages 
-docker run --user 1000:1000 -it \
+docker run --rm --user 1000:1000 -it \
     --volume=${repodir}:/workspace \
     --volume=${pkgcache}:/var/cache/pacman/pkg \
     ${dockerimg} setarch ${sysrescuearch} /bin/bash
