@@ -32,13 +32,13 @@ validpgpkeys=('0F334D8698881578F65D2AE55ED514A45BD5C938'  # Gerardo Exequiel Poz
 
 prepare() {
     cd $pkgname-$pkgver
-    patch -p1 < ../../archiso-v43-01-squashfs-options.patch
-    patch -p1 < ../../archiso-v43-02-fix-pxeboot-dhcp.patch
-    patch -p1 < ../../archiso-v43-03-fix-pxeboot-multiple-interfaces.patch
-    patch -p1 < ../../archiso-v43-04-increase-cow-spacesize.patch
-    patch -p1 < ../../archiso-v43-05-add-loadsrm.patch
-    patch -p1 < ../../archiso-v43-06-copytoram.patch
-    patch -p1 < ../../archiso-v43-07-yaml-config.patch
+    patch -p1 < ../archiso-v43-01-squashfs-options.patch
+    patch -p1 < ../archiso-v43-02-fix-pxeboot-dhcp.patch
+    patch -p1 < ../archiso-v43-03-fix-pxeboot-multiple-interfaces.patch
+    patch -p1 < ../archiso-v43-04-increase-cow-spacesize.patch
+    patch -p1 < ../archiso-v43-05-add-loadsrm.patch
+    patch -p1 < ../archiso-v43-06-copytoram.patch
+    patch -p1 < ../archiso-v43-07-yaml-config.patch
 }
 
 package() {
