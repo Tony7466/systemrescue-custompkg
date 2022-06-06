@@ -1,23 +1,26 @@
 # Maintainer: Gerardo Exequiel Pozzi <djgera@archlinux.org>
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
+# Customized version for SystemRescue https://www.system-rescue.org/
+# see https://gitlab.com/systemrescue/systemrescue-sources/-/tree/main/patches
+
 pkgname=archiso
 pkgver=43
-pkgrel=13
-pkgdesc='Tools for creating Arch Linux live and install iso images'
+pkgrel=14
+pkgdesc='Tools for creating Arch Linux live and install iso images, customized for SystemRescue'
 arch=('any')
 license=('GPL')
 url='https://projects.archlinux.org/archiso.git/'
 depends=('make' 'arch-install-scripts' 'squashfs-tools' 'libisoburn' 'dosfstools' 'lynx' 'grub')
 source=("https://sources.archlinux.org/other/${pkgname}/${pkgname}-${pkgver}.tar.gz"
         "https://sources.archlinux.org/other/${pkgname}/${pkgname}-${pkgver}.tar.gz.sig"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/cfcfd6dd7a1a33ebbb86c04a3158b85ccaddd6be/patches/archiso-v43-01-squashfs-options.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/cfcfd6dd7a1a33ebbb86c04a3158b85ccaddd6be/patches/archiso-v43-02-fix-pxeboot-dhcp.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/cfcfd6dd7a1a33ebbb86c04a3158b85ccaddd6be/patches/archiso-v43-03-fix-pxeboot-multiple-interfaces.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/cfcfd6dd7a1a33ebbb86c04a3158b85ccaddd6be/patches/archiso-v43-04-increase-cow-spacesize.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/cfcfd6dd7a1a33ebbb86c04a3158b85ccaddd6be/patches/archiso-v43-05-add-loadsrm.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/cfcfd6dd7a1a33ebbb86c04a3158b85ccaddd6be/patches/archiso-v43-06-copytoram.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/cfcfd6dd7a1a33ebbb86c04a3158b85ccaddd6be/patches/archiso-v43-07-yaml-config.patch")
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7634b922088b0da5cd9de62e7c0ea8b23ddd199f/patches/archiso-v43-01-squashfs-options.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7634b922088b0da5cd9de62e7c0ea8b23ddd199f/patches/archiso-v43-02-fix-pxeboot-dhcp.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7634b922088b0da5cd9de62e7c0ea8b23ddd199f/patches/archiso-v43-03-fix-pxeboot-multiple-interfaces.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7634b922088b0da5cd9de62e7c0ea8b23ddd199f/patches/archiso-v43-04-increase-cow-spacesize.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7634b922088b0da5cd9de62e7c0ea8b23ddd199f/patches/archiso-v43-05-add-loadsrm.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7634b922088b0da5cd9de62e7c0ea8b23ddd199f/patches/archiso-v43-06-copytoram.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/7634b922088b0da5cd9de62e7c0ea8b23ddd199f/patches/archiso-v43-07-yaml-config.patch")
 sha256sums=('4d2274cc5f1c48883941c3e37dfe7882632f9c455f97635aa079c1812571cb13'
             'SKIP'
             'b0a6f5dbb16f04da7cf9b98087e4a81ced97d874a1d7f18334e6fca32d07120c'
@@ -26,7 +29,7 @@ sha256sums=('4d2274cc5f1c48883941c3e37dfe7882632f9c455f97635aa079c1812571cb13'
             '7019657c12a9104d05e969ae6c74eba4554c6404d37b6096b5fcef87eb895688'
             'd2c3ffb9bb86199de1b03fdc215d3f101dd23b9c570c45acd62796ba0ee14c2a'
             '37dea83a9c26eef423177b52422c982d597713231f82d86ad910ea5e9537959f'
-            '1a687e26691afbddcf3433c430b513d58286ca07150b43bad87ba7060a2151ec')
+            '91b4c88ad2b0ec297806a95f5d7b54d1f499fb29798c15bb9089fb732823f1d7')
 validpgpkeys=('0F334D8698881578F65D2AE55ED514A45BD5C938'  # Gerardo Exequiel Pozzi
               '4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC') # Pierre Schmitz
 
