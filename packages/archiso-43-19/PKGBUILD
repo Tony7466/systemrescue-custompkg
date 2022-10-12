@@ -6,7 +6,7 @@
 
 pkgname=archiso
 pkgver=43
-pkgrel=18
+pkgrel=19
 pkgdesc='Tools for creating Arch Linux live and install iso images, customized for SystemRescue'
 arch=('any')
 license=('GPL')
@@ -14,15 +14,15 @@ url='https://gitlab.archlinux.org/archlinux/archiso'
 depends=('make' 'arch-install-scripts' 'squashfs-tools' 'libisoburn' 'dosfstools' 'lynx' 'grub')
 source=("https://sources.archlinux.org/other/${pkgname}/${pkgname}-${pkgver}.tar.gz"
         "https://sources.archlinux.org/other/${pkgname}/${pkgname}-${pkgver}.tar.gz.sig"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/d0946d6c3fe6096ace51bf91212cbc21ad5eb6a1/patches/archiso-v43-01-squashfs-options.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/d0946d6c3fe6096ace51bf91212cbc21ad5eb6a1/patches/archiso-v43-02-fix-pxeboot-dhcp.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/d0946d6c3fe6096ace51bf91212cbc21ad5eb6a1/patches/archiso-v43-03-fix-pxeboot-multiple-interfaces.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/d0946d6c3fe6096ace51bf91212cbc21ad5eb6a1/patches/archiso-v43-04-increase-cow-spacesize.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/d0946d6c3fe6096ace51bf91212cbc21ad5eb6a1/patches/archiso-v43-05-add-loadsrm.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/d0946d6c3fe6096ace51bf91212cbc21ad5eb6a1/patches/archiso-v43-06-copytoram.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/d0946d6c3fe6096ace51bf91212cbc21ad5eb6a1/patches/archiso-v43-07-yaml-config.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/d0946d6c3fe6096ace51bf91212cbc21ad5eb6a1/patches/archiso-v43-08-glibc-fix-dns.patch"
-        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/d0946d6c3fe6096ace51bf91212cbc21ad5eb6a1/patches/archiso-v43-09-pxe_http.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/28274716e8aa069292cf21f9815892d87a656a7f/patches/archiso-v43-01-squashfs-options.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/28274716e8aa069292cf21f9815892d87a656a7f/patches/archiso-v43-02-fix-pxeboot-dhcp.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/28274716e8aa069292cf21f9815892d87a656a7f/patches/archiso-v43-03-fix-pxeboot-multiple-interfaces.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/28274716e8aa069292cf21f9815892d87a656a7f/patches/archiso-v43-04-increase-cow-spacesize.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/28274716e8aa069292cf21f9815892d87a656a7f/patches/archiso-v43-05-add-loadsrm.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/28274716e8aa069292cf21f9815892d87a656a7f/patches/archiso-v43-06-copytoram.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/28274716e8aa069292cf21f9815892d87a656a7f/patches/archiso-v43-07-yaml-config.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/28274716e8aa069292cf21f9815892d87a656a7f/patches/archiso-v43-08-glibc-fix-dns.patch"
+        "https://gitlab.com/systemrescue/systemrescue-sources/-/raw/28274716e8aa069292cf21f9815892d87a656a7f/patches/archiso-v43-09-pxe_http.patch"
         )
 sha256sums=('4d2274cc5f1c48883941c3e37dfe7882632f9c455f97635aa079c1812571cb13'
             'SKIP'
@@ -31,7 +31,7 @@ sha256sums=('4d2274cc5f1c48883941c3e37dfe7882632f9c455f97635aa079c1812571cb13'
             'dc67a7414cc26736405b7ab1f3a1c743a9f47251637a47b1744be6ebd5cbcf11'
             '7019657c12a9104d05e969ae6c74eba4554c6404d37b6096b5fcef87eb895688'
             'd2c3ffb9bb86199de1b03fdc215d3f101dd23b9c570c45acd62796ba0ee14c2a'
-            '37dea83a9c26eef423177b52422c982d597713231f82d86ad910ea5e9537959f'
+            '99b713e57bac7a45d86680ae735feac026a5704f44d776a9133ba2a46e274470'
             'c1e0bd5a52f231d963736a4f6996f6088cf39004bcabdd981a874006b8cc4491'
             '6d479cb3ac48fd16f94ade229b13c79d2d3ab7aa0d28cafc4750b323486b3dc3'
             'dc10efd6820971178fdc178a0b845795829dbdbd140eafe24de0d6429767a2de')
