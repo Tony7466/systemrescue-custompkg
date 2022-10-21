@@ -2,19 +2,19 @@
 
 pkgname=('mesa-minimal')
 pkgdesc="Minimal version of the mesa package to only provide essential libraries"
-pkgver=22.0.1
-pkgrel=3
+pkgver=22.2.2
+pkgrel=1
 arch=('x86_64')
 makedepends=('python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
              'libomxil-bellagio' 'libclc' 'clang' 'libglvnd' 'libunwind' 'lm_sensors' 'libxrandr'
-             'valgrind' 'glslang' 'vulkan-icd-loader' 'directx-headers' 'cmake' 'meson')
+             'systemd' 'valgrind' 'glslang' 'vulkan-icd-loader' 'directx-headers' 'cmake' 'meson')
 url="https://www.mesa3d.org/"
 license=('custom')
 options=('debug')
 source=(https://mesa.freedesktop.org/archive/mesa-${pkgver}.tar.xz{,.sig}
         LICENSE)
-sha512sums=('cc8012b8f3fcbecfbb153d0e009e6522c3776023501da8499c06f1eaa9ab0a555ca597e16e4d7a2b954b05c8c0737ae6567e0d8549fb63aa86ae587eb31cd01e'
+sha512sums=('a1eb67e1ae4880c79b1fdc570f4389baba0b8ba796da7e695c9af19a7d92b6c06b95570e6c796548b61355989025fb7efbf9acac74cbd695f7e297dc913b933c'
             'SKIP'
             'f9f0d0ccf166fe6cb684478b6f1e1ab1f2850431c06aa041738563eb1808a004e52cdec823c103c9e180f03ffc083e95974d291353f0220fe52ae6d4897fecc7')
 validpgpkeys=('8703B6700E7EE06D7A39B8D6EDAE37B02CEB490D'  # Emil Velikov <emil.l.velikov@gmail.com>
@@ -40,6 +40,7 @@ build() {
 
   arch-meson mesa-$pkgver build \
     -D b_ndebug=true \
+    -D b_lto=false \
     -D platforms=x11,wayland \
     -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast,iris,crocus,zink,d3d12 \
     -D vulkan-drivers=amd,intel,swrast \
@@ -96,9 +97,6 @@ package() {
   provides=('mesa' 'mesa-libgl' 'opengl-driver')
   conflicts=('mesa-libgl')
   replaces=('mesa-libgl')
-
-  #_install fakeinstall/usr/share/drirc.d/00-mesa-defaults.conf
-  #_install fakeinstall/usr/share/glvnd/egl_vendor.d/50_mesa.json
 
   _install fakeinstall/usr/lib/libgbm.so*
 
