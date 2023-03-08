@@ -1,0 +1,34 @@
+pkgname=stressapptest
+
+# there hasn't been an official release for some years
+# but there are many patches in the projects git
+# so we use the current git with a 0.x pkgrel, so that an
+# official release later will always have a higher version
+
+_commit=fd4ae17eaad7fde69e1308abbe5af3181ec6ce15
+_shortcommit=fd4ae17
+_commitdate=20221219
+
+pkgver=1.0.10
+_pkgver=v${pkgver}
+pkgrel=0.${_commitdate}
+
+pkgdesc="Stressful Application Test"
+url="https://github.com/stressapptest/stressapptest"
+license=('Apache-2.0')
+arch=('x86_64')
+depends=('gcc-libs' 'libaio')
+makedepends=()
+source=("https://github.com/${pkgname}/${pkgname}/archive/${_commit}/${pkgname}-${_shortcommit}.tar.gz")
+sha256sums=('4acad43abb0747c82f7125236609b9c2f1fba84db1ef026dae2a9b3dad2dbe07')
+
+build() {
+  cd "${srcdir}"/"${pkgname}-${_commit}"
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "${srcdir}"/"${pkgname}-${_commit}"
+  make DESTDIR="${pkgdir}" install
+}
