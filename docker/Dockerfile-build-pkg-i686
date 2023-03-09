@@ -5,7 +5,7 @@ RUN pacman -Syyu --noconfirm autoconf autogen automake pkgconf clang llvm valgri
 RUN pacman -Syyu --noconfirm parted reiserfsprogs ntfs-3g fuse dialog asciidoc liburcu libinih xmlto python-setuptools gtk3 && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm go nss dbus-glib mbedtls libxt cloud-utils python-mako python-sphinx yelp-tools docbook-utils perl-sgmls && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm libclc libva libvdpau wayland-protocols glslang directx-headers && rm -rf /var/cache/pacman/pkg/*
-RUN pacman -Syyu --noconfirm judy libbsd lksctp-tools xxhash libmd && rm -rf /var/cache/pacman/pkg/*
+RUN pacman -Syyu --noconfirm debugedit judy libbsd lksctp-tools xxhash libmd && rm -rf /var/cache/pacman/pkg/*
 RUN ln -s /usr/bin/core_perl/pod2man /usr/bin/
 RUN sed -i -e 's!^.*BUILDDIR=.*!BUILDDIR=/tmp/makepkg/!' /etc/makepkg.conf
 RUN useradd -m -u 1000 -s /bin/bash user
