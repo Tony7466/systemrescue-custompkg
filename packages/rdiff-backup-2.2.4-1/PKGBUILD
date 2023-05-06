@@ -68,7 +68,8 @@ check() {
 
   python setup.py install --root=test-install --optimize=1 --skip-build
   export PATH="$PWD/test-install/usr/bin:$PATH"
-  export PYTHONPATH="$PWD/test-install/usr/lib/python3.10/site-packages"
+  export PYTHONVER=$(python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
+  export PYTHONPATH="$PWD/test-install/usr/lib/python${PYTHONVER}/site-packages"
 
   # Must be the first command to setup the test environment
   python testing/commontest.py
