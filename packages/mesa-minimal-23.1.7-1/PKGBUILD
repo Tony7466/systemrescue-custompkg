@@ -2,8 +2,9 @@
 
 pkgname=('mesa-minimal')
 pkgdesc="Minimal version of the mesa package to only provide essential libraries"
-pkgver=22.2.2
+pkgver=23.1.7
 pkgrel=1
+epoch=1
 arch=('x86_64')
 makedepends=('python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
@@ -12,11 +13,16 @@ makedepends=('python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence
 url="https://www.mesa3d.org/"
 license=('custom')
 options=('debug')
-source=(https://mesa.freedesktop.org/archive/mesa-${pkgver}.tar.xz{,.sig}
-        LICENSE)
-sha512sums=('a1eb67e1ae4880c79b1fdc570f4389baba0b8ba796da7e695c9af19a7d92b6c06b95570e6c796548b61355989025fb7efbf9acac74cbd695f7e297dc913b933c'
+source=(
+  https://mesa.freedesktop.org/archive/mesa-${pkgver}.tar.xz{,.sig}
+  LICENSE
+)
+sha256sums=('409641eadf0ed1c7794797a6f5a0b0195b5580b282166e5ec5629c6bcda6acd3'
             'SKIP'
-            'f9f0d0ccf166fe6cb684478b6f1e1ab1f2850431c06aa041738563eb1808a004e52cdec823c103c9e180f03ffc083e95974d291353f0220fe52ae6d4897fecc7')
+            '7052ba73bb07ea78873a2431ee4e828f4e72bda7d176d07f770fa48373dec537')
+b2sums=('ec688b2a5db396423e53b8798dfbff0c2034e6f0f80e3b73a27b92b0441cfa8578bb633577b5199f1a4a107bdf80af23bc4663b424324f2f71b0abcaa6c4b103'
+        'SKIP'
+        '1ecf007b82260710a7bf5048f47dd5d600c168824c02c595af654632326536a6527fbe0738670ee7b921dd85a70425108e0f471ba85a8e1ca47d294ad74b4adb')
 validpgpkeys=('8703B6700E7EE06D7A39B8D6EDAE37B02CEB490D'  # Emil Velikov <emil.l.velikov@gmail.com>
               '946D09B5E4C9845E63075FF1D961C596A7203456'  # Andres Gomez <tanty@igalia.com>
               'E3E8F480C52ADD73B278EE78E1ECBE07D7D70895'  # Juan Antonio Suárez Romero (Igalia, S.L.) <jasuarez@igalia.com>
@@ -27,51 +33,50 @@ validpgpkeys=('8703B6700E7EE06D7A39B8D6EDAE37B02CEB490D'  # Emil Velikov <emil.l
 prepare() {
   cd mesa-$pkgver
 
+  # Include package release in version string so Chromium invalidates
+  # its GPU cache; otherwise it can cause pages to render incorrectly.
+  # https://bugs.launchpad.net/ubuntu/+source/chromium-browser/+bug/2020604
+  echo "$pkgver-arch$epoch.$pkgrel" >VERSION
 }
 
 build() {
+  local meson_options=(
+    -D android-libbacktrace=disabled
+    -D b_ndebug=true
+    -D dri3=enabled
+    -D egl=enabled
+    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast,iris,crocus,zink,d3d12
+    -D gallium-extra-hud=true
+    -D gallium-nine=true
+    -D gallium-omx=bellagio
+    -D gallium-opencl=icd
+    -D gallium-va=enabled
+    -D gallium-vdpau=enabled
+    -D gallium-xa=enabled
+    -D gbm=enabled
+    -D gles1=disabled
+    -D gles2=enabled
+    -D glvnd=true
+    -D glx=dri
+    -D libunwind=enabled
+    -D llvm=enabled
+    -D lmsensors=enabled
+    -D microsoft-clc=disabled
+    -D osmesa=true
+    -D platforms=x11,wayland
+    -D shared-glapi=enabled
+    -D valgrind=enabled
+    -D video-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc
+    -D vulkan-drivers=amd,intel,swrast
+    -D vulkan-layers=device-select,intel-nullhw,overlay
+  )
+
   # Build only minimal debug info to reduce size
   CFLAGS+=' -g1'
   CXXFLAGS+=' -g1'
 
-  # https://gitlab.freedesktop.org/mesa/mesa/-/issues/6229
-  CFLAGS+=' -mtls-dialect=gnu'
-  CXXFLAGS+=' -mtls-dialect=gnu'
-
-  arch-meson mesa-$pkgver build \
-    -D b_ndebug=true \
-    -D b_lto=false \
-    -D platforms=x11,wayland \
-    -D gallium-drivers=r300,r600,radeonsi,nouveau,virgl,svga,swrast,iris,crocus,zink,d3d12 \
-    -D vulkan-drivers=amd,intel,swrast \
-    -D vulkan-layers=device-select,intel-nullhw,overlay \
-    -D dri3=enabled \
-    -D egl=enabled \
-    -D gallium-extra-hud=true \
-    -D gallium-nine=true \
-    -D gallium-omx=bellagio \
-    -D gallium-opencl=icd \
-    -D gallium-va=enabled \
-    -D gallium-vdpau=enabled \
-    -D gallium-xa=enabled \
-    -D gallium-xvmc=disabled \
-    -D gbm=enabled \
-    -D gles1=disabled \
-    -D gles2=enabled \
-    -D glvnd=true \
-    -D glx=dri \
-    -D libunwind=enabled \
-    -D llvm=enabled \
-    -D lmsensors=enabled \
-    -D osmesa=true \
-    -D shared-glapi=enabled \
-    -D microsoft-clc=disabled \
-    -D valgrind=enabled
-
-  # Print config
-  meson configure build
-
-  ninja -C build
+  arch-meson mesa-$pkgver build "${meson_options[@]}"
+  meson configure build # Print config
   meson compile -C build
 
   # fake installation to be seperated into packages
