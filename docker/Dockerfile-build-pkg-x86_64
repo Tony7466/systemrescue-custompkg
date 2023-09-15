@@ -8,6 +8,7 @@ RUN pacman -Syyu --noconfirm go nss dbus-glib mbedtls libxt cloud-utils python-m
 RUN pacman -Syyu --noconfirm libclc libva libvdpau wayland-protocols glslang directx-headers && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm debugedit judy libbsd lksctp-tools xxhash libmd librsync python-psutil python-yaml && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm python-setuptools-scm asciidoctor python-pylibacl python-pyxattr && rm -rf /var/cache/pacman/pkg/*
+RUN pacman -Syyu --noconfirm python-build python-installer python-wheel && rm -rf /var/cache/pacman/pkg/*
 RUN ln -s /usr/bin/core_perl/pod2man /usr/bin/
 RUN sed -i -e 's!^.*BUILDDIR=.*!BUILDDIR=/tmp/makepkg/!' /etc/makepkg.conf
 RUN useradd -m -u 1000 -s /bin/bash user
