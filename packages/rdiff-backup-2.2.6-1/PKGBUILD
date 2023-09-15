@@ -4,21 +4,27 @@
 # Contributor: Erwin Van de Velde <erwin.vandevelde@gmail.com>
 
 pkgname=rdiff-backup
-pkgver=2.2.5
+pkgver=2.2.6
 pkgrel=1
 pkgdesc="Reverse differential backup tool, over a network or locally"
 arch=(x86_64)
 url="https://github.com/rdiff-backup/rdiff-backup"
 license=(GPL)
 depends=(
+  glibc
   librsync
+  procps-ng
+  python
   python-psutil
   python-yaml
 )
 makedepends=(
+  asciidoctor
+  python-build
+  python-installer
   python-setuptools
   python-setuptools-scm
-  asciidoctor
+  python-wheel
 )
 checkdepends=(
   python-pylibacl
@@ -36,27 +42,17 @@ source=(
   "rdiff-backup-filesrepo-$_rdiff_backup_filesrepo_hash.tar.gz::https://github.com/rdiff-backup/rdiff-backup-filesrepo/archive/$_rdiff_backup_filesrepo_hash.tar.gz"
 )
 sha256sums=(
-  '6ca47fcc81b4886a862e292f189f630b39e4523fc1c76c611ed40e92e4684e65'
+  '5c7aeda0e37e1c0720a18831cb612d57802319118759af2896ae0f7308c8d629'
   '96395a278b0b2b23a2005449ab50a771cdd168683e5942bfcfa3d04f5980c9f2'
 )
 
 _archive="$pkgname-$pkgver"
 
-prepare() {
-  cd "$_archive"
-
-  {
-    echo "node: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-    echo "node-date: xxxxxxxxxxxxxxxxxxxxxxxxx"
-    echo "describe-name: v$pkgver"
-    echo "ref-names: HEAD -> master, tag: v$pkgver, origin/master, master/HEAD"
-  } > .git_archival.txt
-}
-
 build() {
   cd "$_archive"
 
-  python setup.py build
+  export SETUPTOOLS_SCM_PRETEND_VERSION=$pkgver
+  python -m build --wheel --no-isolation
 }
 
 check() {
@@ -66,10 +62,11 @@ check() {
     --file "$srcdir/rdiff-backup-filesrepo-$_rdiff_backup_filesrepo_hash/rdiff-backup_testfiles.tar" \
     --directory "$srcdir"
 
-  python setup.py install --root=test-install --optimize=1 --skip-build
+  python_version=$(python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
+
+  python -m installer --destdir=test-install dist/*.whl
   export PATH="$PWD/test-install/usr/bin:$PATH"
-  export PYTHONVER=$(python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
-  export PYTHONPATH="$PWD/test-install/usr/lib/python${PYTHONVER}/site-packages"
+  export PYTHONPATH="$PWD/test-install/usr/lib/python$python_version/site-packages"
 
   # Must be the first command to setup the test environment
   python testing/commontest.py
@@ -102,9 +99,9 @@ check() {
   python testing/connectiontest.py --verbose --buffer
   python testing/incrementtest.py --verbose --buffer
   python testing/hardlinktest.py --verbose --buffer
-  python testing/eas_aclstest.py --verbose --buffer
+  # python testing/eas_aclstest.py --verbose --buffer  # Fails on tmpfs
   python testing/FilenameMappingtest.py --verbose --buffer
-  python testing/fs_abilitiestest.py --verbose --buffer
+  # python testing/fs_abilitiestest.py --verbose --buffer  # Fails on tmpfs
   python testing/hashtest.py --verbose --buffer
   # python testing/selectiontest.py --verbose --buffer  # Missing mknod'ed test files
   python testing/metadatatest.py --verbose --buffer
@@ -126,5 +123,7 @@ check() {
 package() {
   cd "$_archive"
 
-  python setup.py install --root="$pkgdir" --optimize=1 --skip-build
+  python -m installer --destdir="$pkgdir" dist/*.whl
+
+  install -Dm644 tools/completions/bash/rdiff-backup "$pkgdir/usr/share/bash-completion/completions/rdiff-backup"
 }
