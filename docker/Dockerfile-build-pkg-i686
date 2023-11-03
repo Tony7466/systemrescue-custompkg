@@ -3,7 +3,7 @@ RUN mkdir -p /workspace
 RUN pacman -Syyu --noconfirm sudo vim binutils elfutils git archiso fakeroot gcc make cmake patch grub python ruby lynx && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm autoconf autogen automake pkgconf clang llvm valgrind meson bison byacc flex && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm parted reiserfsprogs ntfs-3g fuse dialog asciidoc liburcu libinih xmlto python-setuptools gtk3 && rm -rf /var/cache/pacman/pkg/*
-RUN pacman -Syyu --noconfirm pcsclite check gengetopt help2man && rm -rf /var/cache/pacman/pkg/*
+RUN pacman -Syyu --noconfirm libconfig pcsclite check gengetopt help2man && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm go nss dbus-glib mbedtls libxt cloud-utils python-mako python-sphinx yelp-tools docbook-utils perl-sgmls && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm libclc libva libvdpau wayland-protocols glslang directx-headers && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm debugedit judy libbsd lksctp-tools xxhash libmd && rm -rf /var/cache/pacman/pkg/*
