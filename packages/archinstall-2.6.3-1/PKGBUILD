@@ -1,0 +1,65 @@
+# Maintainer: David Runge <dvzrv@archlinux.org>
+# Maintainer: Giancarlo Razzolini <grazzolini@archlinux.org>
+# Maintainer: Anton Hvornum <torxed@archlinux.org>
+# Contributor: Anton Hvornum <anton@hvornum.se>
+# Contributor: demostanis worlds <demostanis@protonmail.com>
+
+pkgname=archinstall
+pkgver=2.6.3
+pkgrel=1
+pkgdesc="Just another guided/automated Arch Linux installer with a twist"
+arch=(any)
+url="https://github.com/archlinux/archinstall"
+license=(GPL3)
+depends=(
+  arch-install-scripts
+  btrfs-progs
+  coreutils
+  cryptsetup
+  e2fsprogs
+  glibc
+  kbd
+  pciutils
+  procps-ng
+  python
+  python-pyparted
+  python-simple-term-menu
+  systemd
+  util-linux
+)
+makedepends=(
+  python-build
+  python-installer
+  python-setuptools
+  python-sphinx
+  python-wheel
+)
+optdepends=(
+  'python-systemd: for systemd-journald support'
+)
+provides=(python-archinstall)
+source=(
+  $pkgname-v$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz
+  $pkgname-v$pkgver.tar.gz.sig::$url/releases/download/v$pkgver/$pkgname-$pkgver.tar.gz.sig
+)
+sha512sums=('b000be7a8ab0c096c80b4cb7665785e54b7967ee859ae195395b116a584b1047c1a6365bcca168dcbf83d98e6e5bf60baff1cb8c31fd4628d88e2782be8d2a3a'
+            'SKIP')
+b2sums=('55d6ecaae99ecd87de452af6759af09d942a50eeb1666e2cb8442c0d19408269867d9d0c7a55a89d2a5d94de566ff4534dd4c5d608f1cf18378cbefbb6e06f7c'
+        'SKIP')
+validpgpkeys=('8AA2213C8464C82D879C8127D4B58E897A929F2E') # torxed@archlinux.org
+
+prepare() {
+  cd $pkgname-$pkgver
+}
+
+build() {
+  cd $pkgname-$pkgver
+  python -m build --wheel --no-isolation
+  PYTHONDONTWRITEBYTECODE=1 make man -C docs
+}
+
+package() {
+  cd $pkgname-$pkgver
+  python -m installer --destdir="$pkgdir" dist/*.whl
+  install -vDm 644 docs/_build/man/archinstall.1 -t "$pkgdir/usr/share/man/man1/"
+}
