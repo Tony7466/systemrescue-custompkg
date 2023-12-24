@@ -10,6 +10,7 @@ RUN pacman -Syyu --noconfirm debugedit judy libbsd lksctp-tools xxhash libmd lib
 RUN pacman -Syyu --noconfirm python-setuptools-scm asciidoctor python-pylibacl python-pyxattr && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm python-build python-installer python-wheel python-pyparted python-simple-term-menu && rm -rf /var/cache/pacman/pkg/*
 RUN pacman -Syyu --noconfirm python-sphinx_rtd_theme && rm -rf /var/cache/pacman/pkg/*
+RUN pacman -Syyu --noconfirm mkinitcpio-busybox bats-assert lzop && rm -rf /var/cache/pacman/pkg/*
 RUN ln -s /usr/bin/core_perl/pod2man /usr/bin/
 RUN sed -i -e 's!^.*BUILDDIR=.*!BUILDDIR=/tmp/makepkg/!' /etc/makepkg.conf
 RUN useradd -m -u 1000 -s /bin/bash user
