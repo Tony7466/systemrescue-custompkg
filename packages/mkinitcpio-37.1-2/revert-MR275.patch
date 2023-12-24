@@ -1,0 +1,38 @@
+diff -urN mkinitcpio-37-a/install/filesystems mkinitcpio-37-b/install/filesystems
+--- mkinitcpio-37-a/install/filesystems	2023-11-15 19:18:40.000000000 +0000
++++ mkinitcpio-37-b/install/filesystems	2023-12-24 18:05:18.675856047 +0000
+@@ -2,8 +2,6 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ 
+ build() {
+-    local mount
+-
+     # fs_autodetect_failed is assigned in the autodetect hook
+     # shellcheck disable=SC2154
+     if (( fs_autodetect_failed )); then
+@@ -11,25 +9,6 @@
+     else
+         add_checked_modules -f 'nls' '/kernel/fs'
+     fi
+-
+-    # Some file systems may need `mount.FSTYPE` binaries to properly mount.
+-    # See https://man.archlinux.org/man/mount.8.en#EXTERNAL_HELPERS
+-    # fs_autodetect_failed is assigned in the autodetect hook
+-    # shellcheck disable=SC2154
+-    if (( ! fs_autodetect_failed )) && [[ -n "${rootfstype}${usrfstype}" ]]; then
+-        if command -v "mount.${rootfstype}" &>/dev/null; then
+-            add_binary "mount.${rootfstype}"
+-        fi
+-        if [[ -n "$usrfstype" && "$usrfstype" != "$rootfstype" ]]; then
+-            if command -v "mount.${usrfstype}" &>/dev/null; then
+-                add_binary "mount.${usrfstype}"
+-            fi
+-        fi
+-    else
+-        for mount in $(compgen -c mount.); do
+-            add_binary "$mount"
+-        done
+-    fi
+ }
+ 
+ help() {
