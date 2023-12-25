@@ -1,0 +1,21 @@
+pkgname=blocksync-fast
+pkgver=1.0.3
+pkgrel=1
+pkgdesc="Fast block device sync with digest, designed to improve block-based backups."
+arch=('x86_64')
+url="https://github.com/nethappen/blocksync-fast/"
+depends=('libgcrypt' 'xxhash')
+license=('Apache-2.0')
+source=("https://github.com/nethappen/blocksync-fast/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('7823236b834edb1ebadc270f595c7b75b59b6a4c9896e90894b382e81cf4bd3c')
+
+build() {
+  cd "${srcdir}"/${pkgname}-${pkgver}
+  sh ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "${srcdir}"/${pkgname}-${pkgver}
+  make DESTDIR="${pkgdir}" install
+}
